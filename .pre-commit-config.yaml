@@ -1,0 +1,25 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
+    hooks:
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+    -   id: requirements-txt-fixer
+    -   id: name-tests-test
+    -   id: check-json
+    -   id: check-merge-conflict
+    -   id: check-xml
+    -   id: check-docstring-first
+    -   id: check-case-conflict
+    -   id: check-added-large-files
+    -   id: debug-statements
+
+-   repo: https://github.com/ambv/black
+    rev: "22.3.0"
+    hooks:
+      - id: black
+        language_version: python3.10
+        stages: [pre-commit]
+        entry: black
+        types: [python]

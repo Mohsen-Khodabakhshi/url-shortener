@@ -12,6 +12,7 @@ sqlmodel = "^0.0.22"
 fastapi = {extras = ["standard"], version = "^0.115.5"}
 asyncpg = "^0.30.0"
 alembic = "^1.14.0"
+pre-commit = "^4.0.1"
 
 
 [build-system]
