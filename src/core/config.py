@@ -23,6 +23,11 @@ class DatabaseConfig(BaseConfig):
     database: str = "url_shortener"
     host: str = "localhost"
     port: int = 5432
+    pool_size: int = 10
+    max_overflow: int = 5
+    echo: bool = (
+        True  # True means write sql queries in std.out. Set False in production.
+    )
 
     @property
     def database_url(self) -> str:

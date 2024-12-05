@@ -3,12 +3,15 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.asyncio import create_async_engine
 
-from core.config import database_config, app_config
+from core.config import database_config
 
 
-DATABASE_URL = database_config.database_url
-
-engine = create_async_engine(DATABASE_URL, echo=app_config.debug)
+engine = create_async_engine(
+    url=database_config.database_url,
+    echo=database_config.echo,
+    pool_size=database_config.pool_size,
+    max_overflow=database_config.max_overflow,
+)
 
 
 async def get_session() -> AsyncSession:
