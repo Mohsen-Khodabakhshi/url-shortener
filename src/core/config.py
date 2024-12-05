@@ -36,3 +36,21 @@ class DatabaseConfig(BaseConfig):
 
 
 database_config = DatabaseConfig()
+
+
+class RedisCpConfig(BaseConfig):
+    host: str = "localhost"
+    port: int = 6379
+    database: str = "url_shortener"
+    max_connections: int = 10
+    decode_responses: bool = True
+
+    @property
+    def redis_url(self) -> str:
+        return f"redis://{self.host}:{self.port}/{self.database}"
+
+    class Config:
+        env_prefix = "REDIS_"
+
+
+redis_config = RedisCpConfig()
