@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
 from core import events
+from core.router import initialize_routes
 
 app = FastAPI()
 
@@ -18,3 +19,6 @@ async def shutdown_event() -> None:
 @app.get("/ping")
 def read_root():
     return "pong!"
+
+
+initialize_routes(app=app)
