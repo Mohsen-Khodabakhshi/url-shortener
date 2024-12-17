@@ -3,7 +3,11 @@ from fastapi import FastAPI
 from core import events
 from core.router import initialize_routes
 
+from middlewares.response_schema import response_schema_middleware
+
 app = FastAPI()
+
+response_schema_middleware(app)
 
 
 @app.on_event("startup")

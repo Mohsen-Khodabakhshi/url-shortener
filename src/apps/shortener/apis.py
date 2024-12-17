@@ -36,6 +36,11 @@ async def shorten(
     "/{short_url}",
     response_class=RedirectResponse,
     status_code=status.HTTP_302_FOUND,
+    responses={
+        status.HTTP_404_NOT_FOUND: {
+            "description": "Shortened url, not found | expired | deactivated."
+        },
+    },
 )
 async def redirect_to_main_url(
     short_url: str,
