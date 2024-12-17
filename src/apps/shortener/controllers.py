@@ -48,10 +48,22 @@ class ShortenerController:
         if main_url:
             return main_url
 
-        statement = select(ShortenedUrl).where(ShortenedUrl.short_url == short_url)
+        statement = select(ShortenedUrl).where(
+            ShortenedUrl.short_url == short_url,
+            ShortenedUrl.expired == False,
+            ShortenedUrl.active == True,
+        )
         results = await db.exec(statement)
         shortened_url: ShortenedUrl = results.first()
         if not shortened_url:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="shortened url not found",
+            )
+        if shortened_url.expires_at < datetime.timestamp(datetime.utcnow()):
+            shortened_url.expired = True
+            db.add(shortened_url)
+            await db.commit()
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="shortened url not found",
