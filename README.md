@@ -34,7 +34,7 @@ To run the project locally, follow these steps:
    cp src/.env.sample src/.env
 3. Run using docker-compose:
     ```bash
-    docker-compose run --build
+    docker-compose up --build
 
 ### Option 2:
 #### Prerequisites
